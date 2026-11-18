@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b0e"><meta name="description" content="A local-first AI development workbench for Roblox creators. Generate Luau, worlds, NPCs, effects, and complete game systems.">
+  <title>Forge AI — Roblox development command center</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <a class="brand" href="#home" aria-label="Forge AI home"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span>FORGE<span class="brand-ai">AI</span></span></a>
+      <div class="rail-label">WORKSPACE</div>
+      <nav class="nav" aria-label="Workspace">
+        <button class="nav-item active" data-view="forge"><span class="nav-icon">◈</span> Command center <kbd>⌘ 1</kbd></button>
+        <button class="nav-item" data-view="projects"><span class="nav-icon">▤</span> Project files</button>
+        <button class="nav-item" data-view="studio"><span class="nav-icon">◫</span> Studio bridge <span id="bridgeDot" class="nav-dot"></span></button>
+      </nav>
+      <div class="rail-label tools-label">GENERATORS</div>
+      <div class="generator-nav" id="generatorNav"></div>
+      <div class="rail-bottom">
+        <div class="connection-card"><div class="connection-head"><span class="live-dot"></span><span id="providerLabel">LOCAL ENGINE</span></div><p id="providerDetail">Ready to generate · no key required</p><button class="text-button" id="setupButton">Configure AI provider <span>↗</span></button></div>
+        <div class="profile"><div class="avatar">F</div><div><strong>Creator workspace</strong><small>Local session</small></div><span class="profile-menu">•••</span></div>
+      </div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumbs"><span>WORKSPACE</span><b>/</b><strong id="crumb">COMMAND CENTER</strong></div><div class="top-actions"><span class="secure-label"><span>◉</span> LOCAL &amp; SECURE</span><button class="help-button" id="helpButton">? <span>Guide</span></button><div class="top-avatar">F</div></div></header>
+      <section id="forgeView" class="view">
+        <div class="welcome-row"><div><div class="eyebrow"><span class="spark">✳</span> ROBLOX DEVELOPMENT STUDIO <span class="version-pill">BETA 01</span></div><h1>Build something<br><em>extraordinary.</em></h1><p class="welcome-copy">Your creative command center for building worlds, systems, and experiences in Roblox.</p></div><div class="welcome-aside"><div class="orb"><span>✳</span><i></i></div><span>IDEA → EXPERIENCE</span></div></div>
+        <div class="capabilities" id="capabilities"></div>
+        <div class="workbench">
+          <div class="workbench-main">
+            <div class="section-heading"><div><div class="overline">CREATION WORKSPACE</div><h2 id="modeTitle">What are we building?</h2></div><div class="mode-count"><span class="live-dot"></span> <span id="modeCount">8 tools ready</span></div></div>
+            <div class="mode-chips" id="modeChips"></div>
+            <label class="prompt-label" for="promptInput">DESCRIBE YOUR IDEA <span>Be specific. Great prompts make great games.</span></label>
+            <div class="prompt-box"><textarea id="promptInput" maxlength="5000" placeholder="Describe what you want to create…\n\nExample: Create a server-authoritative sword combat system with hit detection, cooldowns, and impact VFX."></textarea><div class="prompt-footer"><div class="prompt-tools"><button id="exampleButton" class="prompt-tool">✧ <span>Surprise me</span></button><button id="clearButton" class="prompt-tool">⌫ <span>Clear</span></button></div><span id="charCount">0 / 5,000</span></div></div>
+            <div class="options-row"><label class="name-input">PROJECT NAME <input id="nameInput" maxlength="60" placeholder="MyAwesomeGame"></label><label class="provider-select">ENGINE <select id="engineSelect"><option value="auto">Auto (AI if configured)</option><option value="local">Local templates</option><option value="ai">AI provider</option></select></label></div>
+            <button id="generateButton" class="generate-button"><span class="button-icon">✳</span><span>Generate with Forge AI</span><span class="button-shortcut">⌘ ↵</span></button>
+            <p class="privacy-note">◉ Generated locally or through your configured server-side AI provider. Your API key never enters the browser.</p>
+          </div>
+          <aside class="workbench-aside"><div class="aside-title"><span class="aside-icon">◈</span><div><strong>FORGE PIPELINE</strong><small>From idea to in-game</small></div><span class="pipeline-status">READY</span></div><div class="pipeline-steps"><div class="pipeline-step active"><span>01</span><div><b>Describe</b><small>Tell Forge what you imagine</small></div><i>✓</i></div><div class="pipeline-step"><span>02</span><div><b>Generate</b><small>Production-ready Luau &amp; assets</small></div><i>02</i></div><div class="pipeline-step"><span>03</span><div><b>Review</b><small>Inspect every file before use</small></div><i>03</i></div><div class="pipeline-step"><span>04</span><div><b>Send to Studio</b><small>Transfer with the Forge plugin</small></div><i>04</i></div></div><div class="aside-tip"><span>✦</span><p><b>Pro tip</b> Ask for a specific placement, behavior, and edge cases. Forge will include setup notes in your scripts.</p></div><div class="pipeline-foot"><span>BUILT FOR CREATORS</span><span>ROBLOX STUDIO ↗</span></div></aside>
+        </div>
+        <div class="result-panel hidden" id="resultPanel"><div class="result-top"><div><div class="overline">GENERATION COMPLETE</div><h2 id="resultTitle">Your files are ready</h2><p id="resultSummary"></p></div><div class="result-actions"><button class="secondary-button" id="downloadButton">↓ Download project</button><button class="studio-button" id="sendStudioButton">◫ Send to Studio</button></div></div><div class="file-workspace"><div class="file-list" id="fileList"></div><div class="code-view"><div class="code-toolbar"><span id="activeFileName">Select a file</span><div><button id="copyButton" class="icon-action" title="Copy source">▢ Copy</button><button id="downloadFileButton" class="icon-action" title="Download selected file">↓ File</button></div></div><pre><code id="codeOutput">Generated source appears here.</code></pre></div></div><div class="result-footer"><span><i class="live-dot"></i> <span id="providerResult">Generated locally</span></span><span>Review generated code before publishing to your live experience.</span></div></div>
+      </section>
+      <section id="projectsView" class="view hidden"><div class="page-heading"><div class="eyebrow">YOUR WORKSPACE</div><h1>Project <em>files.</em></h1><p>Generated source stays in this browser session. Download a project bundle to keep it.</p></div><div class="empty-state" id="projectsEmpty"><div class="empty-mark">▤</div><h2>Your workspace is ready</h2><p>Generate a script, world, or game system and your files will appear here.</p><button class="secondary-button" data-goto="forge">Open command center →</button></div><div id="projectsTable" class="project-cards"></div></section>
+      <section id="studioView" class="view hidden"><div class="page-heading"><div class="eyebrow">LOCAL TRANSFER</div><h1>Studio <em>bridge.</em></h1><p>Send generated scripts into your open place with the companion Roblox Studio plugin.</p></div><div class="studio-layout"><div class="studio-connect-card"><div class="connect-icon">◫</div><div class="overline">PLUGIN CONNECTION</div><h2>Connect Roblox Studio</h2><p>Install the Forge Bridge plugin, enter the token below, and click Connect. Generated files will appear in the selected service folder.</p><div class="token-display"><span id="tokenValue">Loading local token…</span><button id="copyTokenButton">Copy</button></div><div class="studio-endpoint" id="endpointValue"></div><div class="bridge-state"><span class="live-dot"></span><span id="queueState">Checking local bridge…</span></div><button class="secondary-button" id="refreshQueueButton">↻ Refresh queue status</button></div><div class="studio-instructions"><div class="overline">SETUP GUIDE</div><h2>One-time setup</h2><ol><li><span>1</span><div><b>Open the plugin file</b><p>In Studio, create a Script in ServerStorage, paste in <code>plugin/ForgeBridge.rbxm.lua</code>, select it, then choose Plugins → Save as Local Plugin. Delete the original ServerStorage copy after it appears in PluginDebugService.</p></div></li><li><span>2</span><div><b>Enable HTTP requests</b><p>In Studio, open Game Settings → Security and enable <i>Allow HTTP Requests</i> for your place.</p></div></li><li><span>3</span><div><b>Connect the bridge</b><p>Open the Forge Bridge toolbar widget and paste the local token from this page. The server must stay running while connected.</p></div></li><li><span>4</span><div><b>Generate and send</b><p>Return to the Command Center, generate files, then click <i>Send to Studio</i>. The plugin creates scripts in the mapped services.</p></div></li></ol><div class="studio-note">Transfers stay on this computer at <code>127.0.0.1</code>. Roblox Studio asks to enable HTTP because the plugin talks to your local Forge server.</div></div></div><div class="queue-card"><div><div class="overline">TRANSFER ACTIVITY</div><h2>Recent deliveries</h2></div><div id="queueActivity" class="queue-activity">No transfers yet.</div></div></section>
+      <footer class="site-footer"><span>FORGE AI <b>·</b> A ROBLOX CREATOR WORKSPACE</span><span>LOCAL FIRST · SERVER SIDE AI · BUILT FOR STUDIO</span></footer>
+    </main>
+  </div>
+  <div class="toast hidden" id="toast" role="status"></div>
+  <dialog id="setupDialog"><form method="dialog"><button class="dialog-close" value="cancel" aria-label="Close">×</button><div class="eyebrow">OPTIONAL PROVIDER</div><h2>Configure server-side AI</h2><p>Forge reads <code>OPENAI_API_KEY</code> and <code>OPENAI_MODEL</code> from the server process environment. Restart the server after setting them. The key is never saved in or sent from the browser.</p><pre>OPENAI_API_KEY=your-key-here\nOPENAI_MODEL=gpt-4.1-mini\nnpm start</pre><p>Without a key, local procedural generators remain available.</p><button class="secondary-button" value="cancel">Got it</button></form></dialog>
+  <script src="/app.js" defer></script>
+</body></html>

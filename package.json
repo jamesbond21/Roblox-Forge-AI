@@ -1,0 +1,8 @@
+{
+  "name": "roblox-forge-ai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node src/server.mjs", "dev": "node --watch src/server.mjs" },
+  "engines": { "node": ">=20" }
+}
